@@ -1,0 +1,88 @@
+<?php if (isset($component)) { $__componentOriginalc107e2f90dff5eb05519f33918d2c807 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginalc107e2f90dff5eb05519f33918d2c807 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'a74ad8dfacd4f985eb3977517615ce25::card.index','data' => ['id' => $box['id'],'class' => 'meta-boxes mb-3']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('core::card'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(Illuminate\View\AnonymousComponent::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['id' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($box['id']),'class' => 'meta-boxes mb-3']); ?>
+    <?php if (isset($component)) { $__componentOriginalf7ec4b8ef3fc6db54b9665bd653222c4 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginalf7ec4b8ef3fc6db54b9665bd653222c4 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'a74ad8dfacd4f985eb3977517615ce25::card.header.index','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('core::card.header'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(Illuminate\View\AnonymousComponent::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+        <?php if (isset($component)) { $__componentOriginal61297c2b6766060b621d6f9a17b28154 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal61297c2b6766060b621d6f9a17b28154 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'a74ad8dfacd4f985eb3977517615ce25::card.title','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('core::card.title'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(Illuminate\View\AnonymousComponent::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+            <?php echo BaseHelper::clean($box['title']); ?>
+
+         <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal61297c2b6766060b621d6f9a17b28154)): ?>
+<?php $attributes = $__attributesOriginal61297c2b6766060b621d6f9a17b28154; ?>
+<?php unset($__attributesOriginal61297c2b6766060b621d6f9a17b28154); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal61297c2b6766060b621d6f9a17b28154)): ?>
+<?php $component = $__componentOriginal61297c2b6766060b621d6f9a17b28154; ?>
+<?php unset($__componentOriginal61297c2b6766060b621d6f9a17b28154); ?>
+<?php endif; ?>
+
+        <?php echo $__env->yieldPushContent('meta-box-header-' . $box['id']); ?>
+     <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginalf7ec4b8ef3fc6db54b9665bd653222c4)): ?>
+<?php $attributes = $__attributesOriginalf7ec4b8ef3fc6db54b9665bd653222c4; ?>
+<?php unset($__attributesOriginalf7ec4b8ef3fc6db54b9665bd653222c4); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalf7ec4b8ef3fc6db54b9665bd653222c4)): ?>
+<?php $component = $__componentOriginalf7ec4b8ef3fc6db54b9665bd653222c4; ?>
+<?php unset($__componentOriginalf7ec4b8ef3fc6db54b9665bd653222c4); ?>
+<?php endif; ?>
+
+    <?php if (isset($component)) { $__componentOriginal4fdb92edf089f19cd17d37829580c9a6 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal4fdb92edf089f19cd17d37829580c9a6 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'a74ad8dfacd4f985eb3977517615ce25::card.body.index','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('core::card.body'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(Illuminate\View\AnonymousComponent::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+        <?php echo $callback; ?>
+
+     <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal4fdb92edf089f19cd17d37829580c9a6)): ?>
+<?php $attributes = $__attributesOriginal4fdb92edf089f19cd17d37829580c9a6; ?>
+<?php unset($__attributesOriginal4fdb92edf089f19cd17d37829580c9a6); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal4fdb92edf089f19cd17d37829580c9a6)): ?>
+<?php $component = $__componentOriginal4fdb92edf089f19cd17d37829580c9a6; ?>
+<?php unset($__componentOriginal4fdb92edf089f19cd17d37829580c9a6); ?>
+<?php endif; ?>
+ <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginalc107e2f90dff5eb05519f33918d2c807)): ?>
+<?php $attributes = $__attributesOriginalc107e2f90dff5eb05519f33918d2c807; ?>
+<?php unset($__attributesOriginalc107e2f90dff5eb05519f33918d2c807); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc107e2f90dff5eb05519f33918d2c807)): ?>
+<?php $component = $__componentOriginalc107e2f90dff5eb05519f33918d2c807; ?>
+<?php unset($__componentOriginalc107e2f90dff5eb05519f33918d2c807); ?>
+<?php endif; ?>
+<?php /**PATH F:\xamp\htdocs\mimi\platform/core/base/resources/views/elements/meta-box-wrap.blade.php ENDPATH**/ ?>

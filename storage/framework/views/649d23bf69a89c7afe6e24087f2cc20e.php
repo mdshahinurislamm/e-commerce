@@ -1,0 +1,1 @@
+<i class="fa fa-truck-fast"></i><?php /**PATH F:\xamp\htdocs\mimi\storage\framework\views/c99cf77d18e048c00efab2e2a01fa318.blade.php ENDPATH**/ ?>

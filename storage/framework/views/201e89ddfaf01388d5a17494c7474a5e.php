@@ -1,0 +1,2 @@
+<?php echo $__env->make('packages/theme::fronts.toast-notification', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php /**PATH F:\xamp\htdocs\mimi\platform/packages/theme/resources/views/toast-notification.blade.php ENDPATH**/ ?>
