@@ -27,19 +27,19 @@ class SteadfastController extends SettingController
         // Check if enable_disable is set to 1 and validate license fields
 
         if ($validatedData['enable_disable'] == 1) {
-            if (empty($validatedData['license_code']) || empty($validatedData['client_name'])) {
-                return redirect()->back()->withErrors('Enable API requires both License File and Client Name to be set.');
-            }
-            // Attempt license verification
-            $apiService = new SteadfastApiServices();
-            $response = $apiService->verify_license();
+            // if (empty($validatedData['license_code']) || empty($validatedData['client_name'])) {
+            //     return redirect()->back()->withErrors('Enable API requires both License File and Client Name to be set.');
+            // }
+            // // Attempt license verification
+            // $apiService = new SteadfastApiServices();
+            // //$response = $apiService->verify_license();
 
  
-            dd($response);
+            // //dd($response);
 
-            if (!$response['status']) {
-                return redirect()->back()->withErrors($response['message']);
-            }
+            // if (!$response['status']) {
+            //     return redirect()->back()->withErrors($response['message']);
+            // }
         
         }
 

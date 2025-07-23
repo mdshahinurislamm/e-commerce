@@ -32,6 +32,11 @@ class SteadfastHenddler
                         $data = $this->filterData($order, $amounts[$key]); // Pass amount to filterData
                       
                         $response = $this->steadfastApiServices->placeOrder($data);
+
+                        //return ['status' => true, 'message' => $response['status']];
+                       //print_r($data); // For quick test
+
+
                         
                         $allSuccessful = $this->handleSingleResponse($order, $response, $errorMessages); // Handle single order response and track success
                        

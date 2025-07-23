@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('content'); ?>
 
 <!-- load css files -->

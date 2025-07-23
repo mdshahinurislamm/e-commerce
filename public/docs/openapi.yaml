@@ -1,0 +1,2703 @@
+openapi: 3.0.3
+info:
+  title: 'Your App'
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'https://farmart.test'
+paths:
+  /api/v1/register:
+    post:
+      summary: Register
+      operationId: register
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Api-Version
+          description: ''
+          example: v1
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: false
+                  data: null
+                  message: 'Registered successfully! We emailed you to verify your account!'
+                properties:
+                  error:
+                    type: boolean
+                    example: false
+                  data:
+                    type: string
+                    example: null
+                  message:
+                    type: string
+                    example: 'Registered successfully! We emailed you to verify your account!'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    first_name:
+                      - 'The first name field is required.'
+                    last_name:
+                      - 'The last name field is required.'
+                    email:
+                      - 'The email field is required.'
+                    password:
+                      - 'The password field is required.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      first_name:
+                        type: array
+                        example:
+                          - 'The first name field is required.'
+                        items:
+                          type: string
+                      last_name:
+                        type: array
+                        example:
+                          - 'The last name field is required.'
+                        items:
+                          type: string
+                      email:
+                        type: array
+                        example:
+                          - 'The email field is required.'
+                        items:
+                          type: string
+                      password:
+                        type: array
+                        example:
+                          - 'The password field is required.'
+                        items:
+                          type: string
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: 'The name of the user.'
+                  example: cupiditate
+                last_name:
+                  type: string
+                  description: 'The name of the user.'
+                  example: voluptas
+                email:
+                  type: string
+                  description: 'The email of the user.'
+                  example: moen.daron@example.com
+                password:
+                  type: string
+                  description: 'The password of user to create.'
+                  example: '|7>&WrhKQ'
+                phone:
+                  type: string
+                  description: 'The phone of the user.'
+                  example: eaque
+                password_confirmation:
+                  type: string
+                  description: 'The password confirmation.'
+                  example: aliquam
+              required:
+                - first_name
+                - last_name
+                - email
+                - password
+                - phone
+                - password_confirmation
+      security: []
+  /api/v1/login:
+    post:
+      summary: Login
+      operationId: login
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Api-Version
+          description: ''
+          example: v1
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: false
+                  data:
+                    token: 1|aF5s7p3xxx1lVL8hkSrPN72m4wPVpTvTs...
+                  message: null
+                properties:
+                  error:
+                    type: boolean
+                    example: false
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: 1|aF5s7p3xxx1lVL8hkSrPN72m4wPVpTvTs...
+                  message:
+                    type: string
+                    example: null
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: bswaniawski@example.net
+                password:
+                  type: string
+                  description: 'The password of user to create.'
+                  example: f_~7THR\OC|rM)
+                login:
+                  type: string
+                  description: 'The email/phone of the user.'
+                  example: esse
+              required:
+                - email
+                - password
+                - login
+      security: []
+  /api/v1/password/forgot:
+    post:
+      summary: 'Forgot password'
+      operationId: forgotPassword
+      description: 'Send a reset link to the given user.'
+      parameters:
+        -
+          in: header
+          name: Api-Version
+          description: ''
+          example: v1
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'The email of the user.'
+                  example: rhiannon.windler@example.org
+              required:
+                - email
+      security: []
+  /api/v1/resend-verify-account-email:
+    post:
+      summary: 'Resend email verification'
+      operationId: resendEmailVerification
+      description: 'Resend the email verification notification.'
+      parameters:
+        -
+          in: header
+          name: Api-Version
+          description: ''
+          example: v1
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'The email of the user.'
+                  example: marcelle.bergnaum@example.net
+              required:
+                - email
+      security: []
+  /api/v1/logout:
+    get:
+      summary: Logout
+      operationId: logout
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Api-Version
+          description: ''
+          example: v1
+          schema:
+            type: string
+      responses:
+        302:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset=\"UTF-8\" />\n        <meta http-equiv=\"refresh\" content=\"0;url='https://farmart.test/login'\" />\n\n        <title>Redirecting to https://farmart.test/login</title>\n    </head>\n    <body>\n        Redirecting to <a href=\"https://farmart.test/login\">https://farmart.test/login</a>.\n    </body>\n</html>"
+      tags:
+        - Authentication
+  /api/v1/search:
+    get:
+      summary: 'Search post'
+      operationId: searchPost
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Api-Version
+          description: ''
+          example: v1
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: true
+                  data: null
+                  message: 'No results found, please try with different keywords.'
+                properties:
+                  error:
+                    type: boolean
+                    example: true
+                  data:
+                    type: string
+                    example: null
+                  message:
+                    type: string
+                    example: 'No results found, please try with different keywords.'
+      tags:
+        - Blog
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                q:
+                  type: string
+                  description: 'The search keyword.'
+                  example: neque
+              required:
+                - q
+      security: []
+  /api/v1/posts:
+    get:
+      summary: 'List posts'
+      operationId: listPosts
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Api-Version
+          description: ''
+          example: v1
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 1
+                      name: '4 Expert Tips On How To Choose The Right Men’s Wallet'
+                      slug: 4-expert-tips-on-how-to-choose-the-right-mens-wallet
+                      description: 'You should pay more attention when you choose your wallets. There are a lot of them on the market with the different designs and styles. When you choose carefully, you would be able to buy a wallet that is catered to your needs. Not to mention that it will help to enhance your style significantly.'
+                      image: 'https://farmart.test/storage/news/1.jpg'
+                      categories:
+                        -
+                          id: 2
+                          name: Fashion
+                          slug: fashion
+                          url: 'https://farmart.test/blog/fashion'
+                          description: 'Enim accusamus aut porro animi. Reprehenderit et vero perferendis earum quisquam quidem. Facere iste atque ipsum.'
+                        -
+                          id: 3
+                          name: Electronic
+                          slug: electronic
+                          url: 'https://farmart.test/blog/electronic'
+                          description: 'Qui rerum ut impedit dolorem odio. Magnam non cupiditate et soluta placeat a id voluptatem. Dolores totam enim eveniet deserunt et architecto magnam.'
+                      tags:
+                        -
+                          id: 1
+                          name: General
+                          slug: general
+                          description: ''
+                        -
+                          id: 2
+                          name: Design
+                          slug: design
+                          description: ''
+                        -
+                          id: 3
+                          name: Fashion
+                          slug: fashion
+                          description: ''
+                        -
+                          id: 4
+                          name: Branding
+                          slug: branding
+                          description: ''
+                        -
+                          id: 5
+                          name: Modern
+                          slug: modern
+                          description: ''
+                      created_at: '2023-12-07T10:27:16.000000Z'
+                      updated_at: '2023-12-07T10:27:16.000000Z'
+                    -
+                      id: 2
+                      name: 'Sexy Clutches: How to Buy & Wear a Designer Clutch Bag'
+                      slug: sexy-clutches-how-to-buy-wear-a-designer-clutch-bag
+                      description: 'You should pay more attention when you choose your wallets. There are a lot of them on the market with the different designs and styles. When you choose carefully, you would be able to buy a wallet that is catered to your needs. Not to mention that it will help to enhance your style significantly.'
+                      image: 'https://farmart.test/storage/news/2.jpg'
+                      categories:
+                        -
+                          id: 1
+                          name: Ecommerce
+                          slug: ecommerce
+                          url: 'https://farmart.test/blog/ecommerce'
+                          description: 'Qui dolores minus quia. Incidunt et et veniam sequi illum dolor. Quis rerum ullam harum ipsum voluptas eveniet.'
+                        -
+                          id: 4
+                          name: Commercial
+                          slug: commercial
+                          url: 'https://farmart.test/blog/commercial'
+                          description: 'Porro quia ipsa quidem laborum dolor. Quia ut eum dolores. In debitis illo ut. Possimus dolores dicta vel quae.'
+                      tags:
+                        -
+                          id: 1
+                          name: General
+                          slug: general
+                          description: ''
+                        -
+                          id: 2
+                          name: Design
+                          slug: design
+                          description: ''
+                        -
+                          id: 3
+                          name: Fashion
+                          slug: fashion
+                          description: ''
+                        -
+                          id: 4
+                          name: Branding
+                          slug: branding
+                          description: ''
+                        -
+                          id: 5
+                          name: Modern
+                          slug: modern
+                          description: ''
+                      created_at: '2023-12-07T10:27:16.000000Z'
+                      updated_at: '2023-12-07T10:27:16.000000Z'
+                    -
+                      id: 3
+                      name: 'The Top 2020 Handbag Trends to Know'
+                      slug: the-top-2020-handbag-trends-to-know
+                      description: 'You should pay more attention when you choose your wallets. There are a lot of them on the market with the different designs and styles. When you choose carefully, you would be able to buy a wallet that is catered to your needs. Not to mention that it will help to enhance your style significantly.'
+                      image: 'https://farmart.test/storage/news/3.jpg'
+                      categories:
+                        -
+                          id: 1
+                          name: Ecommerce
+                          slug: ecommerce
+                          url: 'https://farmart.test/blog/ecommerce'
+                          description: 'Qui dolores minus quia. Incidunt et et veniam sequi illum dolor. Quis rerum ullam harum ipsum voluptas eveniet.'
+                        -
+                          id: 4
+                          name: Commercial
+                          slug: commercial
+                          url: 'https://farmart.test/blog/commercial'
+                          description: 'Porro quia ipsa quidem laborum dolor. Quia ut eum dolores. In debitis illo ut. Possimus dolores dicta vel quae.'
+                      tags:
+                        -
+                          id: 1
+                          name: General
+                          slug: general
+                          description: ''
+                        -
+                          id: 2
+                          name: Design
+                          slug: design
+                          description: ''
+                        -
+                          id: 3
+                          name: Fashion
+                          slug: fashion
+                          description: ''
+                        -
+                          id: 4
+                          name: Branding
+                          slug: branding
+                          description: ''
+                        -
+                          id: 5
+                          name: Modern
+                          slug: modern
+                          description: ''
+                      created_at: '2023-12-07T10:27:16.000000Z'
+                      updated_at: '2023-12-07T10:27:16.000000Z'
+                    -
+                      id: 4
+                      name: 'How to Match the Color of Your Handbag With an Outfit'
+                      slug: how-to-match-the-color-of-your-handbag-with-an-outfit
+                      description: 'You should pay more attention when you choose your wallets. There are a lot of them on the market with the different designs and styles. When you choose carefully, you would be able to buy a wallet that is catered to your needs. Not to mention that it will help to enhance your style significantly.'
+                      image: 'https://farmart.test/storage/news/4.jpg'
+                      categories:
+                        -
+                          id: 2
+                          name: Fashion
+                          slug: fashion
+                          url: 'https://farmart.test/blog/fashion'
+                          description: 'Enim accusamus aut porro animi. Reprehenderit et vero perferendis earum quisquam quidem. Facere iste atque ipsum.'
+                        -
+                          id: 4
+                          name: Commercial
+                          slug: commercial
+                          url: 'https://farmart.test/blog/commercial'
+                          description: 'Porro quia ipsa quidem laborum dolor. Quia ut eum dolores. In debitis illo ut. Possimus dolores dicta vel quae.'
+                      tags:
+                        -
+                          id: 1
+                          name: General
+                          slug: general
+                          description: ''
+                        -
+                          id: 2
+                          name: Design
+                          slug: design
+                          description: ''
+                        -
+                          id: 3
+                          name: Fashion
+                          slug: fashion
+                          description: ''
+                        -
+                          id: 4
+                          name: Branding
+                          slug: branding
+                          description: ''
+                        -
+                          id: 5
+                          name: Modern
+                          slug: modern
+                          description: ''
+                      created_at: '2023-12-07T10:27:16.000000Z'
+                      updated_at: '2023-12-07T10:27:16.000000Z'
+                    -
+                      id: 5
+                      name: 'How to Care for Leather Bags'
+                      slug: how-to-care-for-leather-bags
+                      description: 'You should pay more attention when you choose your wallets. There are a lot of them on the market with the different designs and styles. When you choose carefully, you would be able to buy a wallet that is catered to your needs. Not to mention that it will help to enhance your style significantly.'
+                      image: 'https://farmart.test/storage/news/5.jpg'
+                      categories:
+                        -
+                          id: 2
+                          name: Fashion
+                          slug: fashion
+                          url: 'https://farmart.test/blog/fashion'
+                          description: 'Enim accusamus aut porro animi. Reprehenderit et vero perferendis earum quisquam quidem. Facere iste atque ipsum.'
+                        -
+                          id: 4
+                          name: Commercial
+                          slug: commercial
+                          url: 'https://farmart.test/blog/commercial'
+                          description: 'Porro quia ipsa quidem laborum dolor. Quia ut eum dolores. In debitis illo ut. Possimus dolores dicta vel quae.'
+                      tags:
+                        -
+                          id: 1
+                          name: General
+                          slug: general
+                          description: ''
+                        -
+                          id: 2
+                          name: Design
+                          slug: design
+                          description: ''
+                        -
+                          id: 3
+                          name: Fashion
+                          slug: fashion
+                          description: ''
+                        -
+                          id: 4
+                          name: Branding
+                          slug: branding
+                          description: ''
+                        -
+                          id: 5
+                          name: Modern
+                          slug: modern
+                          description: ''
+                      created_at: '2023-12-07T10:27:16.000000Z'
+                      updated_at: '2023-12-07T10:27:16.000000Z'
+                    -
+                      id: 6
+                      name: "We're Crushing Hard on Summer's 10 Biggest Bag Trends"
+                      slug: were-crushing-hard-on-summers-10-biggest-bag-trends
+                      description: 'You should pay more attention when you choose your wallets. There are a lot of them on the market with the different designs and styles. When you choose carefully, you would be able to buy a wallet that is catered to your needs. Not to mention that it will help to enhance your style significantly.'
+                      image: 'https://farmart.test/storage/news/6.jpg'
+                      categories:
+                        -
+                          id: 2
+                          name: Fashion
+                          slug: fashion
+                          url: 'https://farmart.test/blog/fashion'
+                          description: 'Enim accusamus aut porro animi. Reprehenderit et vero perferendis earum quisquam quidem. Facere iste atque ipsum.'
+                        -
+                          id: 3
+                          name: Electronic
+                          slug: electronic
+                          url: 'https://farmart.test/blog/electronic'
+                          description: 'Qui rerum ut impedit dolorem odio. Magnam non cupiditate et soluta placeat a id voluptatem. Dolores totam enim eveniet deserunt et architecto magnam.'
+                      tags:
+                        -
+                          id: 1
+                          name: General
+                          slug: general
+                          description: ''
+                        -
+                          id: 2
+                          name: Design
+                          slug: design
+                          description: ''
+                        -
+                          id: 3
+                          name: Fashion
+                          slug: fashion
+                          description: ''
+                        -
+                          id: 4
+                          name: Branding
+                          slug: branding
+                          description: ''
+                        -
+                          id: 5
+                          name: Modern
+                          slug: modern
+                          description: ''
+                      created_at: '2023-12-07T10:27:16.000000Z'
+                      updated_at: '2023-12-07T10:27:16.000000Z'
+                    -
+                      id: 7
+                      name: 'Essential Qualities of Highly Successful Music'
+                      slug: essential-qualities-of-highly-successful-music
+                      description: 'You should pay more attention when you choose your wallets. There are a lot of them on the market with the different designs and styles. When you choose carefully, you would be able to buy a wallet that is catered to your needs. Not to mention that it will help to enhance your style significantly.'
+                      image: 'https://farmart.test/storage/news/7.jpg'
+                      categories:
+                        -
+                          id: 2
+                          name: Fashion
+                          slug: fashion
+                          url: 'https://farmart.test/blog/fashion'
+                          description: 'Enim accusamus aut porro animi. Reprehenderit et vero perferendis earum quisquam quidem. Facere iste atque ipsum.'
+                        -
+                          id: 3
+                          name: Electronic
+                          slug: electronic
+                          url: 'https://farmart.test/blog/electronic'
+                          description: 'Qui rerum ut impedit dolorem odio. Magnam non cupiditate et soluta placeat a id voluptatem. Dolores totam enim eveniet deserunt et architecto magnam.'
+                      tags:
+                        -
+                          id: 1
+                          name: General
+                          slug: general
+                          description: ''
+                        -
+                          id: 2
+                          name: Design
+                          slug: design
+                          description: ''
+                        -
+                          id: 3
+                          name: Fashion
+                          slug: fashion
+                          description: ''
+                        -
+                          id: 4
+                          name: Branding
+                          slug: branding
+                          description: ''
+                        -
+                          id: 5
+                          name: Modern
+                          slug: modern
+                          description: ''
+                      created_at: '2023-12-07T10:27:16.000000Z'
+                      updated_at: '2023-12-07T10:27:16.000000Z'
+                    -
+                      id: 8
+                      name: '9 Things I Love About Shaving My Head'
+                      slug: 9-things-i-love-about-shaving-my-head
+                      description: 'You should pay more attention when you choose your wallets. There are a lot of them on the market with the different designs and styles. When you choose carefully, you would be able to buy a wallet that is catered to your needs. Not to mention that it will help to enhance your style significantly.'
+                      image: 'https://farmart.test/storage/news/8.jpg'
+                      categories:
+                        -
+                          id: 1
+                          name: Ecommerce
+                          slug: ecommerce
+                          url: 'https://farmart.test/blog/ecommerce'
+                          description: 'Qui dolores minus quia. Incidunt et et veniam sequi illum dolor. Quis rerum ullam harum ipsum voluptas eveniet.'
+                        -
+                          id: 4
+                          name: Commercial
+                          slug: commercial
+                          url: 'https://farmart.test/blog/commercial'
+                          description: 'Porro quia ipsa quidem laborum dolor. Quia ut eum dolores. In debitis illo ut. Possimus dolores dicta vel quae.'
+                      tags:
+                        -
+                          id: 1
+                          name: General
+                          slug: general
+                          description: ''
+                        -
+                          id: 2
+                          name: Design
+                          slug: design
+                          description: ''
+                        -
+                          id: 3
+                          name: Fashion
+                          slug: fashion
+                          description: ''
+                        -
+                          id: 4
+                          name: Branding
+                          slug: branding
+                          description: ''
+                        -
+                          id: 5
+                          name: Modern
+                          slug: modern
+                          description: ''
+                      created_at: '2023-12-07T10:27:16.000000Z'
+                      updated_at: '2023-12-07T10:27:16.000000Z'
+                    -
+                      id: 9
+                      name: 'Why Teamwork Really Makes The Dream Work'
+                      slug: why-teamwork-really-makes-the-dream-work
+                      description: 'You should pay more attention when you choose your wallets. There are a lot of them on the market with the different designs and styles. When you choose carefully, you would be able to buy a wallet that is catered to your needs. Not to mention that it will help to enhance your style significantly.'
+                      image: 'https://farmart.test/storage/news/9.jpg'
+                      categories:
+                        -
+                          id: 1
+                          name: Ecommerce
+                          slug: ecommerce
+                          url: 'https://farmart.test/blog/ecommerce'
+                          description: 'Qui dolores minus quia. Incidunt et et veniam sequi illum dolor. Quis rerum ullam harum ipsum voluptas eveniet.'
+                        -
+                          id: 4
+                          name: Commercial
+                          slug: commercial
+                          url: 'https://farmart.test/blog/commercial'
+                          description: 'Porro quia ipsa quidem laborum dolor. Quia ut eum dolores. In debitis illo ut. Possimus dolores dicta vel quae.'
+                      tags:
+                        -
+                          id: 1
+                          name: General
+                          slug: general
+                          description: ''
+                        -
+                          id: 2
+                          name: Design
+                          slug: design
+                          description: ''
+                        -
+                          id: 3
+                          name: Fashion
+                          slug: fashion
+                          description: ''
+                        -
+                          id: 4
+                          name: Branding
+                          slug: branding
+                          description: ''
+                        -
+                          id: 5
+                          name: Modern
+                          slug: modern
+                          description: ''
+                      created_at: '2023-12-07T10:27:16.000000Z'
+                      updated_at: '2023-12-07T10:27:16.000000Z'
+                    -
+                      id: 10
+                      name: 'The World Caters to Average People'
+                      slug: the-world-caters-to-average-people
+                      description: 'You should pay more attention when you choose your wallets. There are a lot of them on the market with the different designs and styles. When you choose carefully, you would be able to buy a wallet that is catered to your needs. Not to mention that it will help to enhance your style significantly.'
+                      image: 'https://farmart.test/storage/news/10.jpg'
+                      categories:
+                        -
+                          id: 2
+                          name: Fashion
+                          slug: fashion
+                          url: 'https://farmart.test/blog/fashion'
+                          description: 'Enim accusamus aut porro animi. Reprehenderit et vero perferendis earum quisquam quidem. Facere iste atque ipsum.'
+                        -
+                          id: 4
+                          name: Commercial
+                          slug: commercial
+                          url: 'https://farmart.test/blog/commercial'
+                          description: 'Porro quia ipsa quidem laborum dolor. Quia ut eum dolores. In debitis illo ut. Possimus dolores dicta vel quae.'
+                      tags:
+                        -
+                          id: 1
+                          name: General
+                          slug: general
+                          description: ''
+                        -
+                          id: 2
+                          name: Design
+                          slug: design
+                          description: ''
+                        -
+                          id: 3
+                          name: Fashion
+                          slug: fashion
+                          description: ''
+                        -
+                          id: 4
+                          name: Branding
+                          slug: branding
+                          description: ''
+                        -
+                          id: 5
+                          name: Modern
+                          slug: modern
+                          description: ''
+                      created_at: '2023-12-07T10:27:16.000000Z'
+                      updated_at: '2023-12-07T10:27:16.000000Z'
+                  links:
+                    first: 'https://farmart.test/api/v1/posts?page=1'
+                    last: 'https://farmart.test/api/v1/posts?page=2'
+                    prev: null
+                    next: 'https://farmart.test/api/v1/posts?page=2'
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 2
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'https://farmart.test/api/v1/posts?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: 'https://farmart.test/api/v1/posts?page=2'
+                        label: '2'
+                        active: false
+                      -
+                        url: 'https://farmart.test/api/v1/posts?page=2'
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'https://farmart.test/api/v1/posts'
+                    per_page: 10
+                    to: 10
+                    total: 11
+                  error: false
+                  message: null
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        name: '4 Expert Tips On How To Choose The Right Men’s Wallet'
+                        slug: 4-expert-tips-on-how-to-choose-the-right-mens-wallet
+                        description: 'You should pay more attention when you choose your wallets. There are a lot of them on the market with the different designs and styles. When you choose carefully, you would be able to buy a wallet that is catered to your needs. Not to mention that it will help to enhance your style significantly.'
+                        image: 'https://farmart.test/storage/news/1.jpg'
+                        categories:
+                          -
+                            id: 2
+                            name: Fashion
+                            slug: fashion
+                            url: 'https://farmart.test/blog/fashion'
+                            description: 'Enim accusamus aut porro animi. Reprehenderit et vero perferendis earum quisquam quidem. Facere iste atque ipsum.'
+                          -
+                            id: 3
+                            name: Electronic
+                            slug: electronic
+                            url: 'https://farmart.test/blog/electronic'
+                            description: 'Qui rerum ut impedit dolorem odio. Magnam non cupiditate et soluta placeat a id voluptatem. Dolores totam enim eveniet deserunt et architecto magnam.'
+                        tags:
+                          -
+                            id: 1
+                            name: General
+                            slug: general
+                            description: ''
+                          -
+                            id: 2
+                            name: Design
+                            slug: design
+                            description: ''
+                          -
+                            id: 3
+                            name: Fashion
+                            slug: fashion
+                            description: ''
+                          -
+                            id: 4
+                            name: Branding
+                            slug: branding
+                            description: ''
+                          -
+                            id: 5
+                            name: Modern
+                            slug: modern
+                            description: ''
+                        created_at: '2023-12-07T10:27:16.000000Z'
+                        updated_at: '2023-12-07T10:27:16.000000Z'
+                      -
+                        id: 2
+                        name: 'Sexy Clutches: How to Buy & Wear a Designer Clutch Bag'
+                        slug: sexy-clutches-how-to-buy-wear-a-designer-clutch-bag
+                        description: 'You should pay more attention when you choose your wallets. There are a lot of them on the market with the different designs and styles. When you choose carefully, you would be able to buy a wallet that is catered to your needs. Not to mention that it will help to enhance your style significantly.'
+                        image: 'https://farmart.test/storage/news/2.jpg'
+                        categories:
+                          -
+                            id: 1
+                            name: Ecommerce
+                            slug: ecommerce
+                            url: 'https://farmart.test/blog/ecommerce'
+                            description: 'Qui dolores minus quia. Incidunt et et veniam sequi illum dolor. Quis rerum ullam harum ipsum voluptas eveniet.'
+                          -
+                            id: 4
+                            name: Commercial
+                            slug: commercial
+                            url: 'https://farmart.test/blog/commercial'
+                            description: 'Porro quia ipsa quidem laborum dolor. Quia ut eum dolores. In debitis illo ut. Possimus dolores dicta vel quae.'
+                        tags:
+                          -
+                            id: 1
+                            name: General
+                            slug: general
+                            description: ''
+                          -
+                            id: 2
+                            name: Design
+                            slug: design
+                            description: ''
+                          -
+                            id: 3
+                            name: Fashion
+                            slug: fashion
+                            description: ''
+                          -
+                            id: 4
+                            name: Branding
+                            slug: branding
+                            description: ''
+                          -
+                            id: 5
+                            name: Modern
+                            slug: modern
+                            description: ''
+                        created_at: '2023-12-07T10:27:16.000000Z'
+                        updated_at: '2023-12-07T10:27:16.000000Z'
+                      -
+                        id: 3
+                        name: 'The Top 2020 Handbag Trends to Know'
+                        slug: the-top-2020-handbag-trends-to-know
+                        description: 'You should pay more attention when you choose your wallets. There are a lot of them on the market with the different designs and styles. When you choose carefully, you would be able to buy a wallet that is catered to your needs. Not to mention that it will help to enhance your style significantly.'
+                        image: 'https://farmart.test/storage/news/3.jpg'
+                        categories:
+                          -
+                            id: 1
+                            name: Ecommerce
+                            slug: ecommerce
+                            url: 'https://farmart.test/blog/ecommerce'
+                            description: 'Qui dolores minus quia. Incidunt et et veniam sequi illum dolor. Quis rerum ullam harum ipsum voluptas eveniet.'
+                          -
+                            id: 4
+                            name: Commercial
+                            slug: commercial
+                            url: 'https://farmart.test/blog/commercial'
+                            description: 'Porro quia ipsa quidem laborum dolor. Quia ut eum dolores. In debitis illo ut. Possimus dolores dicta vel quae.'
+                        tags:
+                          -
+                            id: 1
+                            name: General
+                            slug: general
+                            description: ''
+                          -
+                            id: 2
+                            name: Design
+                            slug: design
+                            description: ''
+                          -
+                            id: 3
+                            name: Fashion
+                            slug: fashion
+                            description: ''
+                          -
+                            id: 4
+                            name: Branding
+                            slug: branding
+                            description: ''
+                          -
+                            id: 5
+                            name: Modern
+                            slug: modern
+                            description: ''
+                        created_at: '2023-12-07T10:27:16.000000Z'
+                        updated_at: '2023-12-07T10:27:16.000000Z'
+                      -
+                        id: 4
+                        name: 'How to Match the Color of Your Handbag With an Outfit'
+                        slug: how-to-match-the-color-of-your-handbag-with-an-outfit
+                        description: 'You should pay more attention when you choose your wallets. There are a lot of them on the market with the different designs and styles. When you choose carefully, you would be able to buy a wallet that is catered to your needs. Not to mention that it will help to enhance your style significantly.'
+                        image: 'https://farmart.test/storage/news/4.jpg'
+                        categories:
+                          -
+                            id: 2
+                            name: Fashion
+                            slug: fashion
+                            url: 'https://farmart.test/blog/fashion'
+                            description: 'Enim accusamus aut porro animi. Reprehenderit et vero perferendis earum quisquam quidem. Facere iste atque ipsum.'
+                          -
+                            id: 4
+                            name: Commercial
+                            slug: commercial
+                            url: 'https://farmart.test/blog/commercial'
+                            description: 'Porro quia ipsa quidem laborum dolor. Quia ut eum dolores. In debitis illo ut. Possimus dolores dicta vel quae.'
+                        tags:
+                          -
+                            id: 1
+                            name: General
+                            slug: general
+                            description: ''
+                          -
+                            id: 2
+                            name: Design
+                            slug: design
+                            description: ''
+                          -
+                            id: 3
+                            name: Fashion
+                            slug: fashion
+                            description: ''
+                          -
+                            id: 4
+                            name: Branding
+                            slug: branding
+                            description: ''
+                          -
+                            id: 5
+                            name: Modern
+                            slug: modern
+                            description: ''
+                        created_at: '2023-12-07T10:27:16.000000Z'
+                        updated_at: '2023-12-07T10:27:16.000000Z'
+                      -
+                        id: 5
+                        name: 'How to Care for Leather Bags'
+                        slug: how-to-care-for-leather-bags
+                        description: 'You should pay more attention when you choose your wallets. There are a lot of them on the market with the different designs and styles. When you choose carefully, you would be able to buy a wallet that is catered to your needs. Not to mention that it will help to enhance your style significantly.'
+                        image: 'https://farmart.test/storage/news/5.jpg'
+                        categories:
+                          -
+                            id: 2
+                            name: Fashion
+                            slug: fashion
+                            url: 'https://farmart.test/blog/fashion'
+                            description: 'Enim accusamus aut porro animi. Reprehenderit et vero perferendis earum quisquam quidem. Facere iste atque ipsum.'
+                          -
+                            id: 4
+                            name: Commercial
+                            slug: commercial
+                            url: 'https://farmart.test/blog/commercial'
+                            description: 'Porro quia ipsa quidem laborum dolor. Quia ut eum dolores. In debitis illo ut. Possimus dolores dicta vel quae.'
+                        tags:
+                          -
+                            id: 1
+                            name: General
+                            slug: general
+                            description: ''
+                          -
+                            id: 2
+                            name: Design
+                            slug: design
+                            description: ''
+                          -
+                            id: 3
+                            name: Fashion
+                            slug: fashion
+                            description: ''
+                          -
+                            id: 4
+                            name: Branding
+                            slug: branding
+                            description: ''
+                          -
+                            id: 5
+                            name: Modern
+                            slug: modern
+                            description: ''
+                        created_at: '2023-12-07T10:27:16.000000Z'
+                        updated_at: '2023-12-07T10:27:16.000000Z'
+                      -
+                        id: 6
+                        name: "We're Crushing Hard on Summer's 10 Biggest Bag Trends"
+                        slug: were-crushing-hard-on-summers-10-biggest-bag-trends
+                        description: 'You should pay more attention when you choose your wallets. There are a lot of them on the market with the different designs and styles. When you choose carefully, you would be able to buy a wallet that is catered to your needs. Not to mention that it will help to enhance your style significantly.'
+                        image: 'https://farmart.test/storage/news/6.jpg'
+                        categories:
+                          -
+                            id: 2
+                            name: Fashion
+                            slug: fashion
+                            url: 'https://farmart.test/blog/fashion'
+                            description: 'Enim accusamus aut porro animi. Reprehenderit et vero perferendis earum quisquam quidem. Facere iste atque ipsum.'
+                          -
+                            id: 3
+                            name: Electronic
+                            slug: electronic
+                            url: 'https://farmart.test/blog/electronic'
+                            description: 'Qui rerum ut impedit dolorem odio. Magnam non cupiditate et soluta placeat a id voluptatem. Dolores totam enim eveniet deserunt et architecto magnam.'
+                        tags:
+                          -
+                            id: 1
+                            name: General
+                            slug: general
+                            description: ''
+                          -
+                            id: 2
+                            name: Design
+                            slug: design
+                            description: ''
+                          -
+                            id: 3
+                            name: Fashion
+                            slug: fashion
+                            description: ''
+                          -
+                            id: 4
+                            name: Branding
+                            slug: branding
+                            description: ''
+                          -
+                            id: 5
+                            name: Modern
+                            slug: modern
+                            description: ''
+                        created_at: '2023-12-07T10:27:16.000000Z'
+                        updated_at: '2023-12-07T10:27:16.000000Z'
+                      -
+                        id: 7
+                        name: 'Essential Qualities of Highly Successful Music'
+                        slug: essential-qualities-of-highly-successful-music
+                        description: 'You should pay more attention when you choose your wallets. There are a lot of them on the market with the different designs and styles. When you choose carefully, you would be able to buy a wallet that is catered to your needs. Not to mention that it will help to enhance your style significantly.'
+                        image: 'https://farmart.test/storage/news/7.jpg'
+                        categories:
+                          -
+                            id: 2
+                            name: Fashion
+                            slug: fashion
+                            url: 'https://farmart.test/blog/fashion'
+                            description: 'Enim accusamus aut porro animi. Reprehenderit et vero perferendis earum quisquam quidem. Facere iste atque ipsum.'
+                          -
+                            id: 3
+                            name: Electronic
+                            slug: electronic
+                            url: 'https://farmart.test/blog/electronic'
+                            description: 'Qui rerum ut impedit dolorem odio. Magnam non cupiditate et soluta placeat a id voluptatem. Dolores totam enim eveniet deserunt et architecto magnam.'
+                        tags:
+                          -
+                            id: 1
+                            name: General
+                            slug: general
+                            description: ''
+                          -
+                            id: 2
+                            name: Design
+                            slug: design
+                            description: ''
+                          -
+                            id: 3
+                            name: Fashion
+                            slug: fashion
+                            description: ''
+                          -
+                            id: 4
+                            name: Branding
+                            slug: branding
+                            description: ''
+                          -
+                            id: 5
+                            name: Modern
+                            slug: modern
+                            description: ''
+                        created_at: '2023-12-07T10:27:16.000000Z'
+                        updated_at: '2023-12-07T10:27:16.000000Z'
+                      -
+                        id: 8
+                        name: '9 Things I Love About Shaving My Head'
+                        slug: 9-things-i-love-about-shaving-my-head
+                        description: 'You should pay more attention when you choose your wallets. There are a lot of them on the market with the different designs and styles. When you choose carefully, you would be able to buy a wallet that is catered to your needs. Not to mention that it will help to enhance your style significantly.'
+                        image: 'https://farmart.test/storage/news/8.jpg'
+                        categories:
+                          -
+                            id: 1
+                            name: Ecommerce
+                            slug: ecommerce
+                            url: 'https://farmart.test/blog/ecommerce'
+                            description: 'Qui dolores minus quia. Incidunt et et veniam sequi illum dolor. Quis rerum ullam harum ipsum voluptas eveniet.'
+                          -
+                            id: 4
+                            name: Commercial
+                            slug: commercial
+                            url: 'https://farmart.test/blog/commercial'
+                            description: 'Porro quia ipsa quidem laborum dolor. Quia ut eum dolores. In debitis illo ut. Possimus dolores dicta vel quae.'
+                        tags:
+                          -
+                            id: 1
+                            name: General
+                            slug: general
+                            description: ''
+                          -
+                            id: 2
+                            name: Design
+                            slug: design
+                            description: ''
+                          -
+                            id: 3
+                            name: Fashion
+                            slug: fashion
+                            description: ''
+                          -
+                            id: 4
+                            name: Branding
+                            slug: branding
+                            description: ''
+                          -
+                            id: 5
+                            name: Modern
+                            slug: modern
+                            description: ''
+                        created_at: '2023-12-07T10:27:16.000000Z'
+                        updated_at: '2023-12-07T10:27:16.000000Z'
+                      -
+                        id: 9
+                        name: 'Why Teamwork Really Makes The Dream Work'
+                        slug: why-teamwork-really-makes-the-dream-work
+                        description: 'You should pay more attention when you choose your wallets. There are a lot of them on the market with the different designs and styles. When you choose carefully, you would be able to buy a wallet that is catered to your needs. Not to mention that it will help to enhance your style significantly.'
+                        image: 'https://farmart.test/storage/news/9.jpg'
+                        categories:
+                          -
+                            id: 1
+                            name: Ecommerce
+                            slug: ecommerce
+                            url: 'https://farmart.test/blog/ecommerce'
+                            description: 'Qui dolores minus quia. Incidunt et et veniam sequi illum dolor. Quis rerum ullam harum ipsum voluptas eveniet.'
+                          -
+                            id: 4
+                            name: Commercial
+                            slug: commercial
+                            url: 'https://farmart.test/blog/commercial'
+                            description: 'Porro quia ipsa quidem laborum dolor. Quia ut eum dolores. In debitis illo ut. Possimus dolores dicta vel quae.'
+                        tags:
+                          -
+                            id: 1
+                            name: General
+                            slug: general
+                            description: ''
+                          -
+                            id: 2
+                            name: Design
+                            slug: design
+                            description: ''
+                          -
+                            id: 3
+                            name: Fashion
+                            slug: fashion
+                            description: ''
+                          -
+                            id: 4
+                            name: Branding
+                            slug: branding
+                            description: ''
+                          -
+                            id: 5
+                            name: Modern
+                            slug: modern
+                            description: ''
+                        created_at: '2023-12-07T10:27:16.000000Z'
+                        updated_at: '2023-12-07T10:27:16.000000Z'
+                      -
+                        id: 10
+                        name: 'The World Caters to Average People'
+                        slug: the-world-caters-to-average-people
+                        description: 'You should pay more attention when you choose your wallets. There are a lot of them on the market with the different designs and styles. When you choose carefully, you would be able to buy a wallet that is catered to your needs. Not to mention that it will help to enhance your style significantly.'
+                        image: 'https://farmart.test/storage/news/10.jpg'
+                        categories:
+                          -
+                            id: 2
+                            name: Fashion
+                            slug: fashion
+                            url: 'https://farmart.test/blog/fashion'
+                            description: 'Enim accusamus aut porro animi. Reprehenderit et vero perferendis earum quisquam quidem. Facere iste atque ipsum.'
+                          -
+                            id: 4
+                            name: Commercial
+                            slug: commercial
+                            url: 'https://farmart.test/blog/commercial'
+                            description: 'Porro quia ipsa quidem laborum dolor. Quia ut eum dolores. In debitis illo ut. Possimus dolores dicta vel quae.'
+                        tags:
+                          -
+                            id: 1
+                            name: General
+                            slug: general
+                            description: ''
+                          -
+                            id: 2
+                            name: Design
+                            slug: design
+                            description: ''
+                          -
+                            id: 3
+                            name: Fashion
+                            slug: fashion
+                            description: ''
+                          -
+                            id: 4
+                            name: Branding
+                            slug: branding
+                            description: ''
+                          -
+                            id: 5
+                            name: Modern
+                            slug: modern
+                            description: ''
+                        created_at: '2023-12-07T10:27:16.000000Z'
+                        updated_at: '2023-12-07T10:27:16.000000Z'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: '4 Expert Tips On How To Choose The Right Men’s Wallet'
+                        slug:
+                          type: string
+                          example: 4-expert-tips-on-how-to-choose-the-right-mens-wallet
+                        description:
+                          type: string
+                          example: 'You should pay more attention when you choose your wallets. There are a lot of them on the market with the different designs and styles. When you choose carefully, you would be able to buy a wallet that is catered to your needs. Not to mention that it will help to enhance your style significantly.'
+                        image:
+                          type: string
+                          example: 'https://farmart.test/storage/news/1.jpg'
+                        categories:
+                          type: array
+                          example:
+                            -
+                              id: 2
+                              name: Fashion
+                              slug: fashion
+                              url: 'https://farmart.test/blog/fashion'
+                              description: 'Enim accusamus aut porro animi. Reprehenderit et vero perferendis earum quisquam quidem. Facere iste atque ipsum.'
+                            -
+                              id: 3
+                              name: Electronic
+                              slug: electronic
+                              url: 'https://farmart.test/blog/electronic'
+                              description: 'Qui rerum ut impedit dolorem odio. Magnam non cupiditate et soluta placeat a id voluptatem. Dolores totam enim eveniet deserunt et architecto magnam.'
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                example: 2
+                              name:
+                                type: string
+                                example: Fashion
+                              slug:
+                                type: string
+                                example: fashion
+                              url:
+                                type: string
+                                example: 'https://farmart.test/blog/fashion'
+                              description:
+                                type: string
+                                example: 'Enim accusamus aut porro animi. Reprehenderit et vero perferendis earum quisquam quidem. Facere iste atque ipsum.'
+                        tags:
+                          type: array
+                          example:
+                            -
+                              id: 1
+                              name: General
+                              slug: general
+                              description: ''
+                            -
+                              id: 2
+                              name: Design
+                              slug: design
+                              description: ''
+                            -
+                              id: 3
+                              name: Fashion
+                              slug: fashion
+                              description: ''
+                            -
+                              id: 4
+                              name: Branding
+                              slug: branding
+                              description: ''
+                            -
+                              id: 5
+                              name: Modern
+                              slug: modern
+                              description: ''
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                example: 1
+                              name:
+                                type: string
+                                example: General
+                              slug:
+                                type: string
+                                example: general
+                              description:
+                                type: string
+                                example: ''
+                        created_at:
+                          type: string
+                          example: '2023-12-07T10:27:16.000000Z'
+                        updated_at:
+                          type: string
+                          example: '2023-12-07T10:27:16.000000Z'
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'https://farmart.test/api/v1/posts?page=1'
+                      last:
+                        type: string
+                        example: 'https://farmart.test/api/v1/posts?page=2'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: 'https://farmart.test/api/v1/posts?page=2'
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 2
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'https://farmart.test/api/v1/posts?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: 'https://farmart.test/api/v1/posts?page=2'
+                            label: '2'
+                            active: false
+                          -
+                            url: 'https://farmart.test/api/v1/posts?page=2'
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'https://farmart.test/api/v1/posts'
+                      per_page:
+                        type: integer
+                        example: 10
+                      to:
+                        type: integer
+                        example: 10
+                      total:
+                        type: integer
+                        example: 11
+                  error:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: null
+      tags:
+        - Blog
+      security: []
+  /api/v1/categories:
+    get:
+      summary: 'List categories'
+      operationId: listCategories
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Api-Version
+          description: ''
+          example: v1
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 4
+                      name: Commercial
+                      slug: commercial
+                      description: 'Porro quia ipsa quidem laborum dolor. Quia ut eum dolores. In debitis illo ut. Possimus dolores dicta vel quae.'
+                      children: []
+                      parent:
+                        id: null
+                        name: ''
+                        slug: ''
+                        url: 'https://farmart.test'
+                        description: ''
+                    -
+                      id: 3
+                      name: Electronic
+                      slug: electronic
+                      description: 'Qui rerum ut impedit dolorem odio. Magnam non cupiditate et soluta placeat a id voluptatem. Dolores totam enim eveniet deserunt et architecto magnam.'
+                      children: []
+                      parent:
+                        id: null
+                        name: ''
+                        slug: ''
+                        url: 'https://farmart.test'
+                        description: ''
+                    -
+                      id: 2
+                      name: Fashion
+                      slug: fashion
+                      description: 'Enim accusamus aut porro animi. Reprehenderit et vero perferendis earum quisquam quidem. Facere iste atque ipsum.'
+                      children: []
+                      parent:
+                        id: null
+                        name: ''
+                        slug: ''
+                        url: 'https://farmart.test'
+                        description: ''
+                    -
+                      id: 1
+                      name: Ecommerce
+                      slug: ecommerce
+                      description: 'Qui dolores minus quia. Incidunt et et veniam sequi illum dolor. Quis rerum ullam harum ipsum voluptas eveniet.'
+                      children: []
+                      parent:
+                        id: null
+                        name: ''
+                        slug: ''
+                        url: 'https://farmart.test'
+                        description: ''
+                  links:
+                    first: 'https://farmart.test/api/v1/categories?page=1'
+                    last: 'https://farmart.test/api/v1/categories?page=1'
+                    prev: null
+                    next: null
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 1
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'https://farmart.test/api/v1/categories?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'https://farmart.test/api/v1/categories'
+                    per_page: 10
+                    to: 4
+                    total: 4
+                  error: false
+                  message: null
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 4
+                        name: Commercial
+                        slug: commercial
+                        description: 'Porro quia ipsa quidem laborum dolor. Quia ut eum dolores. In debitis illo ut. Possimus dolores dicta vel quae.'
+                        children: []
+                        parent:
+                          id: null
+                          name: ''
+                          slug: ''
+                          url: 'https://farmart.test'
+                          description: ''
+                      -
+                        id: 3
+                        name: Electronic
+                        slug: electronic
+                        description: 'Qui rerum ut impedit dolorem odio. Magnam non cupiditate et soluta placeat a id voluptatem. Dolores totam enim eveniet deserunt et architecto magnam.'
+                        children: []
+                        parent:
+                          id: null
+                          name: ''
+                          slug: ''
+                          url: 'https://farmart.test'
+                          description: ''
+                      -
+                        id: 2
+                        name: Fashion
+                        slug: fashion
+                        description: 'Enim accusamus aut porro animi. Reprehenderit et vero perferendis earum quisquam quidem. Facere iste atque ipsum.'
+                        children: []
+                        parent:
+                          id: null
+                          name: ''
+                          slug: ''
+                          url: 'https://farmart.test'
+                          description: ''
+                      -
+                        id: 1
+                        name: Ecommerce
+                        slug: ecommerce
+                        description: 'Qui dolores minus quia. Incidunt et et veniam sequi illum dolor. Quis rerum ullam harum ipsum voluptas eveniet.'
+                        children: []
+                        parent:
+                          id: null
+                          name: ''
+                          slug: ''
+                          url: 'https://farmart.test'
+                          description: ''
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 4
+                        name:
+                          type: string
+                          example: Commercial
+                        slug:
+                          type: string
+                          example: commercial
+                        description:
+                          type: string
+                          example: 'Porro quia ipsa quidem laborum dolor. Quia ut eum dolores. In debitis illo ut. Possimus dolores dicta vel quae.'
+                        children:
+                          type: array
+                          example: []
+                        parent:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              example: null
+                            name:
+                              type: string
+                              example: ''
+                            slug:
+                              type: string
+                              example: ''
+                            url:
+                              type: string
+                              example: 'https://farmart.test'
+                            description:
+                              type: string
+                              example: ''
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'https://farmart.test/api/v1/categories?page=1'
+                      last:
+                        type: string
+                        example: 'https://farmart.test/api/v1/categories?page=1'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: null
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 1
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'https://farmart.test/api/v1/categories?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: null
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'https://farmart.test/api/v1/categories'
+                      per_page:
+                        type: integer
+                        example: 10
+                      to:
+                        type: integer
+                        example: 4
+                      total:
+                        type: integer
+                        example: 4
+                  error:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: null
+      tags:
+        - Blog
+      security: []
+  /api/v1/tags:
+    get:
+      summary: 'List tags'
+      operationId: listTags
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Api-Version
+          description: ''
+          example: v1
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 1
+                      name: General
+                      slug: general
+                      description: ''
+                    -
+                      id: 2
+                      name: Design
+                      slug: design
+                      description: ''
+                    -
+                      id: 3
+                      name: Fashion
+                      slug: fashion
+                      description: ''
+                    -
+                      id: 4
+                      name: Branding
+                      slug: branding
+                      description: ''
+                    -
+                      id: 5
+                      name: Modern
+                      slug: modern
+                      description: ''
+                  links:
+                    first: 'https://farmart.test/api/v1/tags?page=1'
+                    last: 'https://farmart.test/api/v1/tags?page=1'
+                    prev: null
+                    next: null
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 1
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'https://farmart.test/api/v1/tags?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'https://farmart.test/api/v1/tags'
+                    per_page: 10
+                    to: 5
+                    total: 5
+                  error: false
+                  message: null
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        name: General
+                        slug: general
+                        description: ''
+                      -
+                        id: 2
+                        name: Design
+                        slug: design
+                        description: ''
+                      -
+                        id: 3
+                        name: Fashion
+                        slug: fashion
+                        description: ''
+                      -
+                        id: 4
+                        name: Branding
+                        slug: branding
+                        description: ''
+                      -
+                        id: 5
+                        name: Modern
+                        slug: modern
+                        description: ''
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: General
+                        slug:
+                          type: string
+                          example: general
+                        description:
+                          type: string
+                          example: ''
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'https://farmart.test/api/v1/tags?page=1'
+                      last:
+                        type: string
+                        example: 'https://farmart.test/api/v1/tags?page=1'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: null
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 1
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'https://farmart.test/api/v1/tags?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: null
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'https://farmart.test/api/v1/tags'
+                      per_page:
+                        type: integer
+                        example: 10
+                      to:
+                        type: integer
+                        example: 5
+                      total:
+                        type: integer
+                        example: 5
+                  error:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: null
+      tags:
+        - Blog
+      security: []
+  /api/v1/posts/filters:
+    get:
+      summary: 'Filters posts'
+      operationId: filtersPosts
+      description: ''
+      parameters:
+        -
+          in: query
+          name: page
+          description: 'Current page of the collection. Default: 1'
+          example: 19
+          required: false
+          schema:
+            type: integer
+            description: 'Current page of the collection. Default: 1'
+            example: 19
+        -
+          in: query
+          name: per_page
+          description: 'Maximum number of items to be returned in result set.Default: 10'
+          example: 13
+          required: false
+          schema:
+            type: integer
+            description: 'Maximum number of items to be returned in result set.Default: 10'
+            example: 13
+        -
+          in: query
+          name: search
+          description: 'Limit results to those matching a string.'
+          example: voluptatum
+          required: false
+          schema:
+            type: string
+            description: 'Limit results to those matching a string.'
+            example: voluptatum
+        -
+          in: query
+          name: after
+          description: 'Limit response to posts published after a given ISO8601 compliant date.'
+          example: amet
+          required: false
+          schema:
+            type: string
+            description: 'Limit response to posts published after a given ISO8601 compliant date.'
+            example: amet
+        -
+          in: query
+          name: author
+          description: 'Limit result set to posts assigned to specific authors.'
+          example: eveniet
+          required: false
+          schema:
+            type: string
+            description: 'Limit result set to posts assigned to specific authors.'
+            example: eveniet
+        -
+          in: query
+          name: author_exclude
+          description: 'Ensure result set excludes posts assigned to specific authors.'
+          example: eius
+          required: false
+          schema:
+            type: string
+            description: 'Ensure result set excludes posts assigned to specific authors.'
+            example: eius
+        -
+          in: query
+          name: before
+          description: 'Limit response to posts published before a given ISO8601 compliant date.'
+          example: omnis
+          required: false
+          schema:
+            type: string
+            description: 'Limit response to posts published before a given ISO8601 compliant date.'
+            example: omnis
+        -
+          in: query
+          name: exclude
+          description: 'Ensure result set excludes specific IDs.'
+          example: laudantium
+          required: false
+          schema:
+            type: string
+            description: 'Ensure result set excludes specific IDs.'
+            example: laudantium
+        -
+          in: query
+          name: include
+          description: 'Limit result set to specific IDs.'
+          example: consequatur
+          required: false
+          schema:
+            type: string
+            description: 'Limit result set to specific IDs.'
+            example: consequatur
+        -
+          in: query
+          name: order
+          description: 'Order sort attribute ascending or descending. Default: desc .One of: asc, desc'
+          example: vero
+          required: false
+          schema:
+            type: string
+            description: 'Order sort attribute ascending or descending. Default: desc .One of: asc, desc'
+            example: vero
+        -
+          in: query
+          name: order_by
+          description: 'Sort collection by object attribute. Default: updated_at. One of: author, created_at, updated_at, id,  slug, title'
+          example: magni
+          required: false
+          schema:
+            type: string
+            description: 'Sort collection by object attribute. Default: updated_at. One of: author, created_at, updated_at, id,  slug, title'
+            example: magni
+        -
+          in: query
+          name: categories
+          description: 'Limit result set to all items that have the specified term assigned in the categories taxonomy.'
+          example: quae
+          required: false
+          schema:
+            type: string
+            description: 'Limit result set to all items that have the specified term assigned in the categories taxonomy.'
+            example: quae
+        -
+          in: query
+          name: categories_exclude
+          description: 'Limit result set to all items except those that have the specified term assigned in the categories taxonomy.'
+          example: est
+          required: false
+          schema:
+            type: string
+            description: 'Limit result set to all items except those that have the specified term assigned in the categories taxonomy.'
+            example: est
+        -
+          in: query
+          name: tags
+          description: 'Limit result set to all items that have the specified term assigned in the tags taxonomy.'
+          example: ab
+          required: false
+          schema:
+            type: string
+            description: 'Limit result set to all items that have the specified term assigned in the tags taxonomy.'
+            example: ab
+        -
+          in: query
+          name: tags_exclude
+          description: 'Limit result set to all items except those that have the specified term assigned in the tags taxonomy.'
+          example: beatae
+          required: false
+          schema:
+            type: string
+            description: 'Limit result set to all items except those that have the specified term assigned in the tags taxonomy.'
+            example: beatae
+        -
+          in: query
+          name: featured
+          description: 'Limit result set to items that are sticky.'
+          example: consequatur
+          required: false
+          schema:
+            type: string
+            description: 'Limit result set to items that are sticky.'
+            example: consequatur
+        -
+          in: header
+          name: Api-Version
+          description: ''
+          example: v1
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data: []
+                  links:
+                    first: 'https://farmart.test/api/v1/posts/filters?page=1'
+                    last: 'https://farmart.test/api/v1/posts/filters?page=1'
+                    prev: 'https://farmart.test/api/v1/posts/filters?page=18'
+                    next: null
+                  meta:
+                    current_page: 19
+                    from: null
+                    last_page: 1
+                    links:
+                      -
+                        url: 'https://farmart.test/api/v1/posts/filters?page=18'
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'https://farmart.test/api/v1/posts/filters?page=1'
+                        label: '1'
+                        active: false
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'https://farmart.test/api/v1/posts/filters'
+                    per_page: 13
+                    to: null
+                    total: 0
+                  error: false
+                  message: null
+                properties:
+                  data:
+                    type: array
+                    example: []
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'https://farmart.test/api/v1/posts/filters?page=1'
+                      last:
+                        type: string
+                        example: 'https://farmart.test/api/v1/posts/filters?page=1'
+                      prev:
+                        type: string
+                        example: 'https://farmart.test/api/v1/posts/filters?page=18'
+                      next:
+                        type: string
+                        example: null
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 19
+                      from:
+                        type: string
+                        example: null
+                      last_page:
+                        type: integer
+                        example: 1
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: 'https://farmart.test/api/v1/posts/filters?page=18'
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'https://farmart.test/api/v1/posts/filters?page=1'
+                            label: '1'
+                            active: false
+                          -
+                            url: null
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: 'https://farmart.test/api/v1/posts/filters?page=18'
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'https://farmart.test/api/v1/posts/filters'
+                      per_page:
+                        type: integer
+                        example: 13
+                      to:
+                        type: string
+                        example: null
+                      total:
+                        type: integer
+                        example: 0
+                  error:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: null
+      tags:
+        - Blog
+      security: []
+  '/api/v1/posts/{slug}':
+    get:
+      summary: 'Get post by slug'
+      operationId: getPostBySlug
+      description: ''
+      parameters:
+        -
+          in: query
+          name: slug
+          description: 'Find by slug of post.'
+          example: dicta
+          required: false
+          schema:
+            type: string
+            description: 'Find by slug of post.'
+            example: dicta
+        -
+          in: header
+          name: Api-Version
+          description: ''
+          example: v1
+          schema:
+            type: string
+      responses:
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: true
+                  data: null
+                  message: 'Not found'
+                properties:
+                  error:
+                    type: boolean
+                    example: true
+                  data:
+                    type: string
+                    example: null
+                  message:
+                    type: string
+                    example: 'Not found'
+      tags:
+        - Blog
+      security: []
+    parameters:
+      -
+        in: path
+        name: slug
+        description: 'The slug of the post.'
+        example: aut
+        required: true
+        schema:
+          type: string
+  /api/v1/categories/filters:
+    get:
+      summary: 'Filters categories'
+      operationId: filtersCategories
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Api-Version
+          description: ''
+          example: v1
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 2
+                      name: Fashion
+                      slug: fashion
+                      url: 'https://farmart.test/blog/fashion'
+                      description: 'Enim accusamus aut porro animi. Reprehenderit et vero perferendis earum quisquam quidem. Facere iste atque ipsum.'
+                    -
+                      id: 3
+                      name: Electronic
+                      slug: electronic
+                      url: 'https://farmart.test/blog/electronic'
+                      description: 'Qui rerum ut impedit dolorem odio. Magnam non cupiditate et soluta placeat a id voluptatem. Dolores totam enim eveniet deserunt et architecto magnam.'
+                    -
+                      id: 1
+                      name: Ecommerce
+                      slug: ecommerce
+                      url: 'https://farmart.test/blog/ecommerce'
+                      description: 'Qui dolores minus quia. Incidunt et et veniam sequi illum dolor. Quis rerum ullam harum ipsum voluptas eveniet.'
+                    -
+                      id: 4
+                      name: Commercial
+                      slug: commercial
+                      url: 'https://farmart.test/blog/commercial'
+                      description: 'Porro quia ipsa quidem laborum dolor. Quia ut eum dolores. In debitis illo ut. Possimus dolores dicta vel quae.'
+                  links:
+                    first: 'https://farmart.test/api/v1/categories/filters?page=1'
+                    last: 'https://farmart.test/api/v1/categories/filters?page=1'
+                    prev: null
+                    next: null
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 1
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'https://farmart.test/api/v1/categories/filters?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'https://farmart.test/api/v1/categories/filters'
+                    per_page: 10
+                    to: 4
+                    total: 4
+                  error: false
+                  message: null
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 2
+                        name: Fashion
+                        slug: fashion
+                        url: 'https://farmart.test/blog/fashion'
+                        description: 'Enim accusamus aut porro animi. Reprehenderit et vero perferendis earum quisquam quidem. Facere iste atque ipsum.'
+                      -
+                        id: 3
+                        name: Electronic
+                        slug: electronic
+                        url: 'https://farmart.test/blog/electronic'
+                        description: 'Qui rerum ut impedit dolorem odio. Magnam non cupiditate et soluta placeat a id voluptatem. Dolores totam enim eveniet deserunt et architecto magnam.'
+                      -
+                        id: 1
+                        name: Ecommerce
+                        slug: ecommerce
+                        url: 'https://farmart.test/blog/ecommerce'
+                        description: 'Qui dolores minus quia. Incidunt et et veniam sequi illum dolor. Quis rerum ullam harum ipsum voluptas eveniet.'
+                      -
+                        id: 4
+                        name: Commercial
+                        slug: commercial
+                        url: 'https://farmart.test/blog/commercial'
+                        description: 'Porro quia ipsa quidem laborum dolor. Quia ut eum dolores. In debitis illo ut. Possimus dolores dicta vel quae.'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 2
+                        name:
+                          type: string
+                          example: Fashion
+                        slug:
+                          type: string
+                          example: fashion
+                        url:
+                          type: string
+                          example: 'https://farmart.test/blog/fashion'
+                        description:
+                          type: string
+                          example: 'Enim accusamus aut porro animi. Reprehenderit et vero perferendis earum quisquam quidem. Facere iste atque ipsum.'
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'https://farmart.test/api/v1/categories/filters?page=1'
+                      last:
+                        type: string
+                        example: 'https://farmart.test/api/v1/categories/filters?page=1'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: null
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 1
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'https://farmart.test/api/v1/categories/filters?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: null
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'https://farmart.test/api/v1/categories/filters'
+                      per_page:
+                        type: integer
+                        example: 10
+                      to:
+                        type: integer
+                        example: 4
+                      total:
+                        type: integer
+                        example: 4
+                  error:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: null
+      tags:
+        - Blog
+      security: []
+  '/api/v1/categories/{slug}':
+    get:
+      summary: 'Get category by slug'
+      operationId: getCategoryBySlug
+      description: ''
+      parameters:
+        -
+          in: query
+          name: slug
+          description: 'Find by slug of category.'
+          example: quisquam
+          required: false
+          schema:
+            type: string
+            description: 'Find by slug of category.'
+            example: quisquam
+        -
+          in: header
+          name: Api-Version
+          description: ''
+          example: v1
+          schema:
+            type: string
+      responses:
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: true
+                  data: null
+                  message: 'Not found'
+                properties:
+                  error:
+                    type: boolean
+                    example: true
+                  data:
+                    type: string
+                    example: null
+                  message:
+                    type: string
+                    example: 'Not found'
+      tags:
+        - Blog
+      security: []
+    parameters:
+      -
+        in: path
+        name: slug
+        description: 'The slug of the category.'
+        example: sit
+        required: true
+        schema:
+          type: string
+  /api/v1/me:
+    get:
+      summary: 'Get the user profile information.'
+      operationId: getTheUserProfileInformation
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Api-Version
+          description: ''
+          example: v1
+          schema:
+            type: string
+      responses:
+        302:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset=\"UTF-8\" />\n        <meta http-equiv=\"refresh\" content=\"0;url='https://farmart.test/login'\" />\n\n        <title>Redirecting to https://farmart.test/login</title>\n    </head>\n    <body>\n        Redirecting to <a href=\"https://farmart.test/login\">https://farmart.test/login</a>.\n    </body>\n</html>"
+      tags:
+        - Profile
+    put:
+      summary: 'Update profile'
+      operationId: updateProfile
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Api-Version
+          description: ''
+          example: v1
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: 'First name.'
+                  example: est
+                last_name:
+                  type: string
+                  description: 'Last name.'
+                  example: voluptatibus
+                phone:
+                  type: string
+                  description: Phone.
+                  example: beatae
+                dob:
+                  type: string
+                  description: 'Date of birth.'
+                  example: eligendi
+                gender:
+                  type: string
+                  description: Gender
+                  example: culpa
+                description:
+                  type: string
+                  description: Description
+                  example: 'Quaerat illo et omnis perspiciatis.'
+                email:
+                  type: string
+                  description: Email.
+                  example: deckow.percy@example.org
+              required:
+                - first_name
+                - last_name
+                - phone
+                - dob
+  /api/v1/update/avatar:
+    post:
+      summary: 'Update Avatar'
+      operationId: updateAvatar
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Api-Version
+          description: ''
+          example: v1
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Profile
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                avatar:
+                  type: string
+                  format: binary
+                  description: 'Avatar file.'
+              required:
+                - avatar
+  /api/v1/update/password:
+    put:
+      summary: 'Update password'
+      operationId: updatePassword
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Api-Version
+          description: ''
+          example: v1
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  description: 'The new password of user.'
+                  example: n`5;$T~I>;
+              required:
+                - password
+tags:
+  -
+    name: Authentication
+    description: ''
+  -
+    name: Blog
+    description: ''
+  -
+    name: Profile
+    description: ''

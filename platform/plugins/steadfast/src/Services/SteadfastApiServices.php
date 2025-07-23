@@ -44,7 +44,7 @@ class SteadfastApiServices
     {
         $config = SteadfastsConfig::firstOrNew(); // Assuming you have one record for configuration
         
-        $this->baseUrl = "https://portal.steadfast.com.bd/api/v1";
+        $this->baseUrl = "https://portal.packzy.com/api/v1";
         $this->apiKey = $config->api_key;
         $this->secretKey = $config->secret_key;
         $this->enable_disable = $config->enable_disable;
@@ -91,17 +91,23 @@ class SteadfastApiServices
         //         'message' => 'Please enter secretKey in settings',
         //     ];
         // }
+    
+        // dd($this->baseUrl);
 
+       //return ['status' => true, 'message' => $this->baseUrl];
         
         return Http::withHeaders([
-            'Api-Key' => 'fn6l3jhht0g7opgrjvrphiqndmxubh8z',
-            'Secret-Key' => 'kje8uz2mu6ci53dbzycse8km',
+            'Api-Key' => '5pzqfuchydzdwvn7wi5rbwt7i1da9xsg',
+            'Secret-Key' => '3uych6fazouatpijvf4dfulg',
             'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
         ])
         ->withoutVerifying() // Skip SSL certificate verification
         ->{$method}($this->baseUrl . $url, $data)
-        ->json();
+        ->json();         
     }
+
+    
     public function placeOrder($data)
     {
         return $this->makeRequest('post', '/create_order', $data);
